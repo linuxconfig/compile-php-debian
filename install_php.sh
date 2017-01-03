@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# PHP version to be installed supplied command line argument
+# PHP version to be installed supplied by command line argument
 version=$1
 
-# Navigate to script's workign directory 
+# Navigate to script's working directory 
 cd "$(dirname "$0")"
 
 # Checking for a missing argument
@@ -14,7 +14,7 @@ then
   exit 1
 fi
 
-# Install prerequistes
+# Install Prerequisites
 apt-get update
 apt-get install -y \
         autoconf \
@@ -34,11 +34,12 @@ apt-get install -y \
         libxml2-dev \
         pkg-config
 
-
+# Create directory to be used as an installation target
 mkdir /usr/local/php-$version
 
 git clone https://github.com/php/php-src.git
 cd php-src
+# Exit if non-existing PHP version is supplied
 git checkout PHP-$version || { echo "PHP version $version not found!" ; exit 1; }
 ./buildconf --force
 
