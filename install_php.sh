@@ -37,10 +37,9 @@ apt-get install -y \
 # Create directory to be used as an installation target
 mkdir /usr/local/php-$version
 
-git clone https://github.com/php/php-src.git
+git clone --single-branch --branch "PHP-$version" --depth 1 https://github.com/php/php-src.git
 cd php-src
-# Exit if non-existing PHP version is supplied
-git checkout PHP-$version || { echo "PHP version $version not found!" ; exit 1; }
+
 ./buildconf --force
 
 CONFIGURE_STRINGS="--enable-bcmath \
